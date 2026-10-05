@@ -23,6 +23,38 @@ RU_WEEKDAYS_FULL = [
 ]
 WEEKDAY_SHORT = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВСК"]
 
+# Предустановленные графики: (название, шаблон)
+# None в шаблоне означает «пользователь вводит свой»
+PRESETS = [
+    ("5/2 (по производственному календарю)", "1,1,1,1,1,0,0"),
+    ("2/2 дневная",                          "1,1,0,0"),
+    ("2/2 ночная",                            "2,2,0,0"),
+    ("3/3 дневная",                          "1,1,1,0,0,0"),
+    ("3/3 ночная",                            "2,2,2,0,0,0"),
+    ("ДНОВ (день-ночь-отсыпной-выходной)",         "1,2,0,0"),
+    ("2 смены, 4 бригады",                   "1,1,0,2,2,0,0,0"),
+    ("Свой график",                           None),
+]
+PRESET_LABELS = [label for label, _ in PRESETS]
+PRESET_MAP = {label: pattern for label, pattern in PRESETS}
+CUSTOM_LABEL = "Свой график"
+
+
+def schedule_to_string(schedule: list) -> str:
+    """Преобразует список вида [1,1,0,0] в строку '1,1,0,0'."""
+    return ",".join(str(x) for x in schedule)
+
+
+def find_preset_label(schedule: list) -> str:
+    """Возвращает название предустановки, если график ей соответствует,
+    иначе — CUSTOM_LABEL."""
+    normalized = schedule_to_string(schedule).replace(",", "")
+    for label, pattern in PRESETS:
+        if pattern is not None and pattern.replace(",", "") == normalized:
+            return label
+    return CUSTOM_LABEL
+
+
 # Цвета ячеек: ключ — тип смены из JSON
 SHIFT_BG = {
     0: "white",     # выходной
@@ -44,10 +76,32 @@ class RegistrationView(toga.Box):
         super().__init__(style=Pack(direction=COLUMN, margin=20))
         self.on_success = on_success
 
-        # --- Поля ввода ---
+        # --- Имя и дата ---
         self.name_input = toga.TextInput(placeholder="Иван Иванов")
         self.date_input = toga.DateInput(value=date.today())
-        self.schedule_input = toga.TextInput(placeholder="1,1,0,0")
+
+        # --- Выбор графика ---
+        self.preset_selection = toga.Selection(
+            items=PRESET_LABELS,
+            on_change=self._on_preset_change,
+        )
+
+        self.custom_schedule_label = toga.Label(
+            "Свой график (0 — выходной, 1 — дневная, 2 — ночная):",
+            style=Pack(margin_top=10),
+        )
+        self.custom_schedule_input = toga.TextInput(placeholder="1,1,0,0")
+
+        # --- Часы работы ---
+        self.day_hours_input = toga.TextInput(
+            value="-",
+            placeholder="ЧЧ:ММ - ЧЧ:ММ",
+        )
+        self.night_hours_input = toga.TextInput(
+            value="-",
+            placeholder="ЧЧ:ММ - ЧЧ:ММ",
+        )
+
         self.error_label = toga.Label("", style=Pack(color="red"))
 
         button = toga.Button(
@@ -62,15 +116,32 @@ class RegistrationView(toga.Box):
             self.name_input,
             toga.Label("Дата выхода на работу:", style=Pack(margin_top=10)),
             self.date_input,
-            toga.Label(
-                "График (0 — выходной, 1 — дневная, 2 — ночная):",
-                style=Pack(margin_top=10),
-            ),
-            self.schedule_input,
+            toga.Label("График:", style=Pack(margin_top=10)),
+            self.preset_selection,
+            self.custom_schedule_label,
+            self.custom_schedule_input,
+            toga.Label("Часы дневной смены:", style=Pack(margin_top=10)),
+            self.day_hours_input,
+            toga.Label("Часы ночной смены:", style=Pack(margin_top=10)),
+            self.night_hours_input,
             self.error_label,
             button,
         )
 
+        # Изначально поле «Свой график» скрыто
+        self._update_custom_visibility()
+
+    # ---------- Логика отображения поля «Свой график» ----------
+    def _on_preset_change(self, widget):
+        self._update_custom_visibility()
+
+    def _update_custom_visibility(self):
+        is_custom = self.preset_selection.value == CUSTOM_LABEL
+        vis = "visible" if is_custom else "hidden"
+        self.custom_schedule_label.style.visibility = vis
+        self.custom_schedule_input.style.visibility = vis
+
+    # ---------- Обработка кнопки ----------
     def handle_register(self, widget):
         # 1. Имя
         name = self.name_input.value.strip()
@@ -85,8 +156,22 @@ class RegistrationView(toga.Box):
             return
 
         # 3. График
+        preset_label = self.preset_selection.value
+        if preset_label == CUSTOM_LABEL:
+            schedule_str = self.custom_schedule_input.value
+        else:
+            schedule_str = PRESET_MAP.get(preset_label, "")
+
         try:
-            schedule = User.parse_schedule(self.schedule_input.value)
+            schedule = User.parse_schedule(schedule_str)
+        except ValueError as e:
+            self.error_label.text = str(e)
+            return
+
+        # 4. Часы работы
+        try:
+            day_hours = User.validate_hours(self.day_hours_input.value)
+            night_hours = User.validate_hours(self.night_hours_input.value)
         except ValueError as e:
             self.error_label.text = str(e)
             return
@@ -97,28 +182,10 @@ class RegistrationView(toga.Box):
             "name": name,
             "start_date": start_date.isoformat(),
             "schedule": schedule,
+            # Поля ниже — заглушки, пригодятся позже
+            "day_hours": day_hours,
+            "night_hours": night_hours,
         })
-
-    """@staticmethod
-    def parse_schedule(raw: str) -> list:
-        raw = raw.strip().replace(" ", "")
-        if not raw:
-            raise ValueError("Введите график")
-
-        parts = raw.split(",") if "," in raw else list(raw)
-
-        try:
-            schedule = [int(p) for p in parts if p != ""]
-        except ValueError:
-            raise ValueError("График должен состоять только из цифр 0, 1, 2")
-
-        if any(v not in (0, 1, 2) for v in schedule):
-            raise ValueError("Каждое значение графика — 0, 1 или 2")
-
-        if not schedule:
-            raise ValueError("График не может быть пустым")
-
-        return schedule"""
 
 
 class ProfileView(toga.Box):
@@ -129,6 +196,8 @@ class ProfileView(toga.Box):
         ("name", "Имя"),
         ("anchor", "Дата начала работы"),
         ("schedule", "График"),
+        ("day_hours", "Часы дневной смены"),
+        ("night_hours", "Часы ночной смены"),
     ]
 
     def __init__(self, user: User, on_save, on_back, on_reset=None):
@@ -183,8 +252,16 @@ class ProfileView(toga.Box):
     def _render_view_row(self, field: str, label: str, container: toga.Box):
         container.clear()
         value = getattr(self.user, field)
+
         if field == "schedule":
-            value = ",".join(str(x) for x in value)
+            preset = find_preset_label(value)
+            if preset != CUSTOM_LABEL:
+                value = f"{preset} ({schedule_to_string(value)})"
+            else:
+                value = schedule_to_string(value)
+
+        elif field in ("day_hours", "night_hours") and value == "-":
+            value = "не задано"
 
         container.add(
             toga.Label(f"{label}: {value}", style=Pack(flex=1)),
@@ -200,25 +277,95 @@ class ProfileView(toga.Box):
         container.clear()
         current = getattr(self.user, field)
 
-        if field == "anchor":
+        # --- Имя ---
+        if field == "name":
+            input_widget = toga.TextInput(value=str(current), style=Pack(flex=1))
+            get_value = lambda: input_widget.value.strip()
+
+            container.add(
+                input_widget,
+                self._make_save_button(field, label, container, get_value),
+                self._make_cancel_button(label, container),
+            )
+
+        # --- Дата ---
+        elif field == "anchor":
             input_widget = toga.DateInput(
                 value=date.fromisoformat(current),
                 style=Pack(flex=1),
             )
-            get_value = lambda: input_widget.value.isoformat()
-        elif field == "schedule":
-            input_widget = toga.TextInput(
-                value=",".join(str(x) for x in current),
-                style=Pack(flex=1),
+            get_value = lambda: (
+                input_widget.value.isoformat() if input_widget.value else ""
             )
-            get_value = lambda: input_widget.value.strip()
-        else:
+
+            container.add(
+                input_widget,
+                self._make_save_button(field, label, container, get_value),
+                self._make_cancel_button(label, container),
+            )
+
+        # --- Часы работы (дневные или ночные) ---
+        elif field in ("day_hours", "night_hours"):
+            display_value = "" if current == "-" else current
             input_widget = toga.TextInput(
-                value=str(current),
+                value=display_value,
+                placeholder="ЧЧ:ММ - ЧЧ:ММ или '-'",
                 style=Pack(flex=1),
             )
             get_value = lambda: input_widget.value.strip()
 
+            container.add(
+                input_widget,
+                self._make_save_button(field, label, container, get_value),
+                self._make_cancel_button(label, container),
+            )
+
+        # --- График (выбор из предустановок + свой вариант) ---
+        elif field == "schedule":
+            current_str = schedule_to_string(current)
+            matched_label = find_preset_label(current)
+
+            selection = toga.Selection(
+                items=PRESET_LABELS,
+                value=matched_label,
+                style=Pack(margin_bottom=5),
+            )
+            custom_input = toga.TextInput(
+                value=current_str,
+                placeholder="1,1,0,0",
+                style=Pack(margin_top=5),
+            )
+
+            def update_visibility(w=None):
+                is_custom = selection.value == CUSTOM_LABEL
+                custom_input.style.visibility = "visible" if is_custom else "hidden"
+
+            update_visibility()
+            selection.on_change = update_visibility
+
+            def get_value():
+                if selection.value == CUSTOM_LABEL:
+                    return custom_input.value.strip()
+                return PRESET_MAP[selection.value]
+
+            # Левый столбец: селект + кастомное поле
+            left = toga.Box(
+                children=[selection, custom_input],
+                style=Pack(direction=COLUMN, flex=1, margin_right=5),
+            )
+
+            container.add(
+                left,
+                self._make_save_button(field, label, container, get_value),
+                self._make_cancel_button(label, container),
+            )
+
+        else:
+            raise ValueError(f"Неизвестное поле: {field}")
+
+    # --- Вспомогательные методы для кнопок ✓ и ✗ ---
+
+    def _make_save_button(self, field, label, container, get_value):
         def save(w):
             try:
                 self._apply_change(field, get_value())
@@ -228,15 +375,18 @@ class ProfileView(toga.Box):
             self.error_label.text = ""
             self._render_view_row(field, label, container)
 
+        return toga.Button("✓", on_press=save, style=Pack(width=40))
+
+    def _make_cancel_button(self, label, container):
         def cancel(w):
             self.error_label.text = ""
-            self._render_view_row(field, label, container)
+            self._render_view_row(
+                next(f for f, l in self.FIELDS if l == label),
+                label,
+                container,
+            )
 
-        container.add(
-            input_widget,
-            toga.Button("✓", on_press=save, style=Pack(width=40)),
-            toga.Button("✗", on_press=cancel, style=Pack(width=40)),
-        )
+        return toga.Button("✗", on_press=cancel, style=Pack(width=40))
 
     # ---------- Применение изменений ----------
     def _apply_change(self, field: str, value):
@@ -255,6 +405,11 @@ class ProfileView(toga.Box):
         elif field == "schedule":
             parsed = User.parse_schedule(value)
             self.user.schedule = parsed
+
+        elif field in ("day_hours", "night_hours"):
+            # validate_hours сам вернёт "-", если пусто
+            normalized = User.validate_hours(value)
+            setattr(self.user, field, normalized)
 
         # Сообщаем приложению, что поле изменилось
         self.on_save(field)
@@ -494,6 +649,8 @@ class WSCalendarApp(toga.App):
             name=data["name"],
             anchor=data["start_date"],
             schedule=data["schedule"],
+            day_hours=data["day_hours"],
+            night_hours=data["night_hours"],
         )
         self.user.save_to_json(self.users_file)
 
