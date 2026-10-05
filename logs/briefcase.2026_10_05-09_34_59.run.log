@@ -1,0 +1,581 @@
+Date/Time:       2026-10-05 09:35:01 
+Command line:    C:\Users\wasd6\PycharmProjects\WorkShiftCalendar\.venv\Scripts\briefcase run android
+
+OS Release:      Windows 11
+OS Version:      10.0.26200
+Architecture:    AMD64
+Platform:        Windows-11-10.0.26200-SP0
+
+Python exe:      C:\Users\wasd6\PycharmProjects\WorkShiftCalendar\.venv\Scripts\python.exe
+Python version:  3.14.8 (tags/v3.14.8:8e6e75d, Sep 30 2026, 18:19:33) [MSC v.1944 64 bit (AMD64)]
+Virtual env:     True
+Conda env:       False
+
+Briefcase:       0.4.5
+Target platform: android
+Target format:   gradle
+
+Environment Variables:
+	ALLUSERSPROFILE=C:\ProgramData
+	APPDATA=C:\Users\wasd6\AppData\Roaming
+	COMMONPROGRAMFILES=C:\Program Files\Common Files
+	COMMONPROGRAMFILES(X86)=C:\Program Files (x86)\Common Files
+	COMMONPROGRAMW6432=C:\Program Files\Common Files
+	COMPUTERNAME=CHILLIPIZDRIKK
+	COMSPEC=C:\WINDOWS\system32\cmd.exe
+	DRIVERDATA=C:\Windows\System32\Drivers\DriverData
+	EFC_16120_1262719628=1
+	EFC_16120_1592913036=1
+	EFC_16120_2283032206=1
+	EFC_16120_2775293581=1
+	EFC_16120_2946480783=1
+	EFC_16120_3789132940=1
+	EFC_16120_4126798990=1
+	FIG_TERM=1
+	FPS_BROWSER_APP_PROFILE_STRING=Internet Explorer
+	FPS_BROWSER_USER_PROFILE_STRING=Default
+	HOMEDRIVE=C:
+	HOMEPATH=\Users\wasd6
+	INTELLIJ_TERMINAL_COMMAND_BLOCKS_REWORKED=1
+	LOCALAPPDATA=C:\Users\wasd6\AppData\Local
+	LOGONSERVER=\\CHILLIPIZDRIKK
+	NLS_LANG=RUSSIAN_RUSSIA.CL8MSWIN1251
+	NUMBER_OF_PROCESSORS=12
+	ONEDRIVE=C:\Users\wasd6\OneDrive
+	ONEDRIVECONSUMER=C:\Users\wasd6\OneDrive
+	OS=Windows_NT
+	PATH=C:\Users\wasd6\PycharmProjects\WorkShiftCalendar\.venv/Scripts;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Users\wasd6\AppData\Local\Programs\Python\Python314\Scripts\;C:\Users\wasd6\AppData\Local\Programs\Python\Python314\;C:\Users\wasd6\AppData\Local\Microsoft\WindowsApps;C:\Users\wasd6\AppData\Local\Python\bin;D:\workworkwork\PyCharm 2025.3.3\bin;C:\Oracle;C:\Users\wasd6\AppData\Local\GitHubDesktop\bin
+	PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL
+	PROCESSOR_ARCHITECTURE=AMD64
+	PROCESSOR_IDENTIFIER=AMD64 Family 23 Model 104 Stepping 1, AuthenticAMD
+	PROCESSOR_LEVEL=23
+	PROCESSOR_REVISION=6801
+	PROCESS_LAUNCHED_BY_CW=1
+	PROCESS_LAUNCHED_BY_Q=1
+	PROGRAMDATA=C:\ProgramData
+	PROGRAMFILES=C:\Program Files
+	PROGRAMFILES(X86)=C:\Program Files (x86)
+	PROGRAMW6432=C:\Program Files
+	PSEXECUTIONPOLICYPREFERENCE=Bypass
+	PSMODULEPATH=C:\Users\wasd6\OneDrive\Документы\WindowsPowerShell\Modules;C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
+	PUBLIC=C:\Users\Public
+	PYCHARM=D:\workworkwork\PyCharm 2025.3.3\bin
+	SESSIONNAME=Console
+	SYSTEMDRIVE=C:
+	SYSTEMROOT=C:\WINDOWS
+	TEMP=C:\Users\wasd6\AppData\Local\Temp
+	TERMINAL_EMULATOR=JetBrains-JediTerm
+	TERM_SESSION_ID=acd6e046-3450-43e5-a046-07edf31a6398
+	TMP=C:\Users\wasd6\AppData\Local\Temp
+	TNS_ADMIN=C:\Oracle
+	USERDOMAIN=CHILLIPIZDRIKK
+	USERDOMAIN_ROAMINGPROFILE=CHILLIPIZDRIKK
+	USERNAME=wasd6
+	USERPROFILE=C:\Users\wasd6
+	VIRTUAL_ENV=C:\Users\wasd6\PycharmProjects\WorkShiftCalendar\.venv
+	VIRTUAL_ENV_PROMPT=.venv
+	WINDIR=C:\WINDOWS
+
+pyproject.toml:
+[tool.briefcase]
+project_name = "WorkShiftCalendar"
+bundle = "org.ia.wscalendar"
+version = "0.1"
+license = "MIT"
+author = "CHILLipizdrikk"
+author_email = "wasd666player@gmail.com"
+
+[tool.briefcase.app.WSCalendar]
+formal_name = "Календарь рабочих смен"
+description = "Календарь отслеживания рабочего графика"
+sources = ["src/WSCalendar"]
+requires = [
+    "toga-core",
+    "plyer",
+]
+
+[tool.briefcase.app.WSCalendar.windows]
+requires = [
+    "toga-winforms",
+]
+
+[tool.briefcase.app.WSCalendar.android]
+requires = [
+    "toga-android",
+    "pyjnius",
+]
+permission."android.permission.POST_NOTIFICATIONS" = true
+permission."android.permission.SCHEDULE_EXACT_ALARM" = true
+
+Briefcase Log:
+[09:31:14]                                                                                                                                                               java.py:256
+           [java] A Java 17 JDK was not found; downloading and installing...                                                                                             java.py:256
+           To use an existing JDK 17 instance, specify its root directory path in the JAVA_HOME environment variable.                                                    java.py:263
+                                                                                                                                                                         java.py:268
+[09:31:15] Downloading OpenJDK17U-jdk_x64_windows_hotspot_17.0.17_10.zip...                                                                                              file.py:342
+[09:33:05] Installing OpenJDK... started                                                                                                                                 java.py:300
+[09:33:07] Installing OpenJDK... done                                                                                                                                    java.py:300
+           Using JDK at C:\Users\wasd6\AppData\Local\BeeWare\briefcase\Cache\tools\java17                                                                                java.py:273
+                                                                                                                                                                  android_sdk.py:375
+           [android_sdk] The Android SDK was not found; downloading and installing...                                                                             android_sdk.py:375
+           To use an existing Android SDK instance, specify its root directory path in the ANDROID_HOME environment variable.                                     android_sdk.py:379
+                                                                                                                                                                  android_sdk.py:383
+           Downloading commandlinetools-win-13114758_latest.zip...                                                                                                       file.py:342
+[09:33:21] Installing Android SDK Command-Line Tools 19.0... started                                                                                              android_sdk.py:435
+[09:33:22] Installing Android SDK Command-Line Tools 19.0... done                                                                                                 android_sdk.py:435
+           Removing older Android SDK packages... started                                                                                                         android_sdk.py:475
+           Removing older Android SDK packages... done                                                                                                            android_sdk.py:475
+                                                                                                                                                                  android_sdk.py:611
+           The Android tools provided by Google have license terms that you must accept                                                                           android_sdk.py:611
+           before you may use those tools.                                                                                                                        android_sdk.py:611
+                                                                                                                                                                   subprocess.py:845
+           >>> Running Command:                                                                                                                                    subprocess.py:845
+           >>>     'C:\Users\wasd6\AppData\Local\BeeWare\briefcase\Cache\tools\android_sdk\cmdline-tools\19.0\bin\sdkmanager.bat' --licenses                       subprocess.py:845
+           >>> Working Directory:                                                                                                                                  subprocess.py:845
+           >>>     C:\Users\wasd6\PycharmProjects\WorkShiftCalendar                                                                                                subprocess.py:845
+           >>> Environment Overrides:                                                                                                                              subprocess.py:845
+           >>>     ANDROID_HOME=C:\Users\wasd6\AppData\Local\BeeWare\briefcase\Cache\tools\android_sdk                                                             subprocess.py:845
+           >>>     ANDROID_SDK_ROOT=C:\Users\wasd6\AppData\Local\BeeWare\briefcase\Cache\tools\android_sdk                                                         subprocess.py:845
+           >>>     JAVA_HOME=C:\Users\wasd6\AppData\Local\BeeWare\briefcase\Cache\tools\java17                                                                     subprocess.py:845
+[09:34:03] >>> Return code: 0                                                                                                                                      subprocess.py:845
+                                                                                                                                                                   subprocess.py:845
+           Using Android SDK at C:\Users\wasd6\AppData\Local\BeeWare\briefcase\Cache\tools\android_sdk                                                            android_sdk.py:389
+           Downloading the Android emulator...                                                                                                                    android_sdk.py:666
+                                                                                                                                                                   subprocess.py:845
+           >>> Running Command:                                                                                                                                    subprocess.py:845
+           >>>     'C:\Users\wasd6\AppData\Local\BeeWare\briefcase\Cache\tools\android_sdk\cmdline-tools\19.0\bin\sdkmanager.bat' platform-tools emulator          subprocess.py:845
+           >>> Working Directory:                                                                                                                                  subprocess.py:845
+           >>>     C:\Users\wasd6\PycharmProjects\WorkShiftCalendar                                                                                                subprocess.py:845
+           >>> Environment Overrides:                                                                                                                              subprocess.py:845
+           >>>     ANDROID_HOME=C:\Users\wasd6\AppData\Local\BeeWare\briefcase\Cache\tools\android_sdk                                                             subprocess.py:845
+           >>>     ANDROID_SDK_ROOT=C:\Users\wasd6\AppData\Local\BeeWare\briefcase\Cache\tools\android_sdk                                                         subprocess.py:845
+           >>>     JAVA_HOME=C:\Users\wasd6\AppData\Local\BeeWare\briefcase\Cache\tools\java17                                                                     subprocess.py:845
+[09:34:59] >>> Return code: 0                                                                                                                                      subprocess.py:845
+                                                                                                                                                                   subprocess.py:845
+                                                                                                                                                                      __main__.py:42
+           Briefcase requires git, but it is not installed (or is not on your PATH). Visit:                                                                           __main__.py:43
+                                                                                                                                                                      __main__.py:43
+               https://git-scm.com/                                                                                                                                   __main__.py:43
+                                                                                                                                                                      __main__.py:43
+           to download and install git manually.                                                                                                                      __main__.py:43
+                                                                                                                                                                      __main__.py:43
+           If you have installed git recently and are still getting this error, you may                                                                               __main__.py:43
+           need to restart your terminal session.                                                                                                                     __main__.py:43
+           Saving log... started                                                                                                                                      console.py:566
+
+Main thread traceback:
+╭─────────────────────────────────────────────────────────────────────── Traceback (most recent call last) ────────────────────────────────────────────────────────────────────────╮
+│ C:\Users\wasd6\PycharmProjects\WorkShiftCalendar\.venv\Lib\site-packages\git\__init__.py:296 in <module>                                                                         │
+│                                                                                                                                                                                  │
+│   293                                                                                                                                                                            │
+│   294                                                                                                                                                                            │
+│   295 try:                                                                                                                                                                       │
+│ ❱ 296 │   refresh()                                                                                                                                                              │
+│   297 except Exception as _exc:                                                                                                                                                  │
+│   298 │   raise ImportError(f"Failed to initialize: {_exc}") from _exc                                                                                                           │
+│   299                                                                                                                                                                            │
+│                                                                                                                                                                                  │
+│ ╭───────────────────────────────────────────────────────────────────────── locals ─────────────────────────────────────────────────────────────────────────╮                     │
+│ │           cmd = <module 'git.cmd' from 'C:\\Users\\wasd6\\PycharmProjects\\WorkShiftCalendar\\.venv\\Lib\\site-packages\\git\\cmd.py'>                   │                     │
+│ │        compat = <module 'git.compat' from 'C:\\Users\\wasd6\\PycharmProjects\\WorkShiftCalendar\\.venv\\Lib\\site-packages\\git\\compat.py'>             │                     │
+│ │        config = <module 'git.config' from 'C:\\Users\\wasd6\\PycharmProjects\\WorkShiftCalendar\\.venv\\Lib\\site-packages\\git\\config.py'>             │                     │
+│ │            db = <module 'git.db' from 'C:\\Users\\wasd6\\PycharmProjects\\WorkShiftCalendar\\.venv\\Lib\\site-packages\\git\\db.py'>                     │                     │
+│ │          diff = <module 'git.diff' from 'C:\\Users\\wasd6\\PycharmProjects\\WorkShiftCalendar\\.venv\\Lib\\site-packages\\git\\diff.py'>                 │                     │
+│ │           exc = <module 'git.exc' from 'C:\\Users\\wasd6\\PycharmProjects\\WorkShiftCalendar\\.venv\\Lib\\site-packages\\git\\exc.py'>                   │                     │
+│ │        GIT_OK = False                                                                                                                                    │                     │
+│ │         INDEX = <DiffConstants.INDEX: 2>                                                                                                                 │                     │
+│ │         index = <module 'git.index' from 'C:\\Users\\wasd6\\PycharmProjects\\WorkShiftCalendar\\.venv\\Lib\\site-packages\\git\\index\\__init__.py'>     │                     │
+│ │          List = typing.List                                                                                                                              │                     │
+│ │     NULL_TREE = <DiffConstants.NULL_TREE: 1>                                                                                                             │                     │
+│ │       objects = <module 'git.objects' from 'C:\\Users\\wasd6\\PycharmProjects\\WorkShiftCalendar\\.venv\\Lib\\site-packages\\git\\objects\\__init__.py'> │                     │
+│ │      Optional = typing.Optional                                                                                                                          │                     │
+│ │      PathLike = str | ForwardRef('os.PathLike[str]')                                                                                                     │                     │
+│ │          refs = <module 'git.refs' from 'C:\\Users\\wasd6\\PycharmProjects\\WorkShiftCalendar\\.venv\\Lib\\site-packages\\git\\refs\\__init__.py'>       │                     │
+│ │        remote = <module 'git.remote' from 'C:\\Users\\wasd6\\PycharmProjects\\WorkShiftCalendar\\.venv\\Lib\\site-packages\\git\\remote.py'>             │                     │
+│ │          repo = <module 'git.repo' from 'C:\\Users\\wasd6\\PycharmProjects\\WorkShiftCalendar\\.venv\\Lib\\site-packages\\git\\repo\\__init__.py'>       │                     │
+│ │      Sequence = typing.Sequence                                                                                                                          │                     │
+│ │         Tuple = typing.Tuple                                                                                                                             │                     │
+│ │ TYPE_CHECKING = False                                                                                                                                    │                     │
+│ │         types = <module 'git.types' from 'C:\\Users\\wasd6\\PycharmProjects\\WorkShiftCalendar\\.venv\\Lib\\site-packages\\git\\types.py'>               │                     │
+│ │      warnings = <module 'warnings' from 'C:\\Users\\wasd6\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\warnings.py'>                               │                     │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                     │
+│                                                                                                                                                                                  │
+│ C:\Users\wasd6\PycharmProjects\WorkShiftCalendar\.venv\Lib\site-packages\git\__init__.py:287 in refresh                                                                          │
+│                                                                                                                                                                                  │
+│   284 │   global GIT_OK                                                                        ╭── locals ───╮                                                                   │
+│   285 │   GIT_OK = False                                                                       │ path = None │                                                                   │
+│   286 │                                                                                        ╰─────────────╯                                                                   │
+│ ❱ 287 │   if not Git.refresh(path=path):                                                                                                                                         │
+│   288 │   │   return                                                                                                                                                             │
+│   289 │   if not FetchInfo.refresh():  # noqa: F405                                                                                                                              │
+│   290 │   │   return  # type: ignore[unreachable]                                                                                                                                │
+│                                                                                                                                                                                  │
+│ C:\Users\wasd6\PycharmProjects\WorkShiftCalendar\.venv\Lib\site-packages\git\cmd.py:876 in refresh                                                                               │
+│                                                                                                                                                                                  │
+│    873 │   │   │   │   │   if mode in warn:                                                                                                                                      │
+│    874 │   │   │   │   │   │   _logger.critical(err)                                                                                                                             │
+│    875 │   │   │   │   │   else:                                                                                                                                                 │
+│ ❱  876 │   │   │   │   │   │   raise ImportError(err)                                                                                                                            │
+│    877 │   │   │   │   else:                                                                                                                                                     │
+│    878 │   │   │   │   │   err = dedent(                                                                                                                                         │
+│    879 │   │   │   │   │   │   """\                                                                                                                                              │
+│                                                                                                                                                                                  │
+│ ╭────────────────────────────────────────────────── locals ───────────────────────────────────────────────────╮                                                                  │
+│ │               err = 'Bad git executable.\nThe git executable must be specified in one of the following'+633 │                                                                  │
+│ │             error = ['error', 'e', 'exception', 'raise', 'r', '2']                                          │                                                                  │
+│ │           has_git = False                                                                                   │                                                                  │
+│ │              mode = 'raise'                                                                                 │                                                                  │
+│ │           new_git = 'git'                                                                                   │                                                                  │
+│ │           old_git = None                                                                                    │                                                                  │
+│ │ old_refresh_token = <object object at 0x000001967B6D2140>                                                   │                                                                  │
+│ │              path = None                                                                                    │                                                                  │
+│ │             quiet = ['quiet', 'q', 'silence', 's', 'silent', 'none', 'n', '0']                              │                                                                  │
+│ │              warn = ['warn', 'w', 'warning', 'log', 'l', '1']                                               │                                                                  │
+│ ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+ImportError: Bad git executable.
+The git executable must be specified in one of the following ways:
+    - be included in your $PATH
+    - be set via $GIT_PYTHON_GIT_EXECUTABLE
+    - explicitly set via git.refresh(<full-path-to-git-executable>)
+
+All git commands will error until this is rectified.
+
+This initial message can be silenced or aggravated in the future by setting the
+$GIT_PYTHON_REFRESH environment variable. Use one of the following values:
+    - quiet|q|silence|s|silent|none|n|0: for no message or exception
+    - warn|w|warning|log|l|1: for a warning message (logging level CRITICAL, displayed by default)
+    - error|e|exception|raise|r|2: for a raised exception
+
+Example:
+    export GIT_PYTHON_REFRESH=quiet
+
+
+The above exception was the direct cause of the following exception:
+
+╭─────────────────────────────────────────────────────────────────────── Traceback (most recent call last) ────────────────────────────────────────────────────────────────────────╮
+│ C:\Users\wasd6\PycharmProjects\WorkShiftCalendar\.venv\Lib\site-packages\briefcase\integrations\git.py:40 in verify_install                                                      │
+│                                                                                                                                                                                  │
+│   37 │   │                                                                                    ╭─────────────────────────────────── locals ────────────────────────────────────╮  │
+│   38 │   │   # Check whether the git executable could be imported.                            │ kwargs = {'app': None}                                                        │  │
+│   39 │   │   try:                                                                             │  tools = <briefcase.integrations.base.ToolCache object at 0x000001967FC70C20> │  │
+│ ❱ 40 │   │   │   import git                                                                   ╰───────────────────────────────────────────────────────────────────────────────╯  │
+│   41 │   │   except ImportError as e:  # pragma: no cover                                                                                                                        │
+│   42 │   │   │   # macOS provides git as part of the Xcode command line tools,                                                                                                   │
+│   43 │   │   │   # and also hijacks /usr/bin/git with a trigger that prompts the                                                                                                 │
+│                                                                                                                                                                                  │
+│ C:\Users\wasd6\PycharmProjects\WorkShiftCalendar\.venv\Lib\site-packages\git\__init__.py:298 in <module>                                                                         │
+│                                                                                                                                                                                  │
+│   295 try:                                                                                                                                                                       │
+│   296 │   refresh()                                                                                                                                                              │
+│   297 except Exception as _exc:                                                                                                                                                  │
+│ ❱ 298 │   raise ImportError(f"Failed to initialize: {_exc}") from _exc                                                                                                           │
+│   299                                                                                                                                                                            │
+│   300 # } END initialize git executable path                                                                                                                                     │
+│   301                                                                                                                                                                            │
+│                                                                                                                                                                                  │
+│ ╭───────────────────────────────────────────────────────────────────────── locals ─────────────────────────────────────────────────────────────────────────╮                     │
+│ │           cmd = <module 'git.cmd' from 'C:\\Users\\wasd6\\PycharmProjects\\WorkShiftCalendar\\.venv\\Lib\\site-packages\\git\\cmd.py'>                   │                     │
+│ │        compat = <module 'git.compat' from 'C:\\Users\\wasd6\\PycharmProjects\\WorkShiftCalendar\\.venv\\Lib\\site-packages\\git\\compat.py'>             │                     │
+│ │        config = <module 'git.config' from 'C:\\Users\\wasd6\\PycharmProjects\\WorkShiftCalendar\\.venv\\Lib\\site-packages\\git\\config.py'>             │                     │
+│ │            db = <module 'git.db' from 'C:\\Users\\wasd6\\PycharmProjects\\WorkShiftCalendar\\.venv\\Lib\\site-packages\\git\\db.py'>                     │                     │
+│ │          diff = <module 'git.diff' from 'C:\\Users\\wasd6\\PycharmProjects\\WorkShiftCalendar\\.venv\\Lib\\site-packages\\git\\diff.py'>                 │                     │
+│ │           exc = <module 'git.exc' from 'C:\\Users\\wasd6\\PycharmProjects\\WorkShiftCalendar\\.venv\\Lib\\site-packages\\git\\exc.py'>                   │                     │
+│ │        GIT_OK = False                                                                                                                                    │                     │
+│ │         INDEX = <DiffConstants.INDEX: 2>                                                                                                                 │                     │
+│ │         index = <module 'git.index' from 'C:\\Users\\wasd6\\PycharmProjects\\WorkShiftCalendar\\.venv\\Lib\\site-packages\\git\\index\\__init__.py'>     │                     │
+│ │          List = typing.List                                                                                                                              │                     │
+│ │     NULL_TREE = <DiffConstants.NULL_TREE: 1>                                                                                                             │                     │
+│ │       objects = <module 'git.objects' from 'C:\\Users\\wasd6\\PycharmProjects\\WorkShiftCalendar\\.venv\\Lib\\site-packages\\git\\objects\\__init__.py'> │                     │
+│ │      Optional = typing.Optional                                                                                                                          │                     │
+│ │      PathLike = str | ForwardRef('os.PathLike[str]')                                                                                                     │                     │
+│ │          refs = <module 'git.refs' from 'C:\\Users\\wasd6\\PycharmProjects\\WorkShiftCalendar\\.venv\\Lib\\site-packages\\git\\refs\\__init__.py'>       │                     │
+│ │        remote = <module 'git.remote' from 'C:\\Users\\wasd6\\PycharmProjects\\WorkShiftCalendar\\.venv\\Lib\\site-packages\\git\\remote.py'>             │                     │
+│ │          repo = <module 'git.repo' from 'C:\\Users\\wasd6\\PycharmProjects\\WorkShiftCalendar\\.venv\\Lib\\site-packages\\git\\repo\\__init__.py'>       │                     │
+│ │      Sequence = typing.Sequence                                                                                                                          │                     │
+│ │         Tuple = typing.Tuple                                                                                                                             │                     │
+│ │ TYPE_CHECKING = False                                                                                                                                    │                     │
+│ │         types = <module 'git.types' from 'C:\\Users\\wasd6\\PycharmProjects\\WorkShiftCalendar\\.venv\\Lib\\site-packages\\git\\types.py'>               │                     │
+│ │      warnings = <module 'warnings' from 'C:\\Users\\wasd6\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\warnings.py'>                               │                     │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                     │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+ImportError: Failed to initialize: Bad git executable.
+The git executable must be specified in one of the following ways:
+    - be included in your $PATH
+    - be set via $GIT_PYTHON_GIT_EXECUTABLE
+    - explicitly set via git.refresh(<full-path-to-git-executable>)
+
+All git commands will error until this is rectified.
+
+This initial message can be silenced or aggravated in the future by setting the
+$GIT_PYTHON_REFRESH environment variable. Use one of the following values:
+    - quiet|q|silence|s|silent|none|n|0: for no message or exception
+    - warn|w|warning|log|l|1: for a warning message (logging level CRITICAL, displayed by default)
+    - error|e|exception|raise|r|2: for a raised exception
+
+Example:
+    export GIT_PYTHON_REFRESH=quiet
+
+
+The above exception was the direct cause of the following exception:
+
+╭─────────────────────────────────────────────────────────────────────── Traceback (most recent call last) ────────────────────────────────────────────────────────────────────────╮
+│ C:\Users\wasd6\PycharmProjects\WorkShiftCalendar\.venv\Lib\site-packages\briefcase\__main__.py:27 in main                                                                        │
+│                                                                                                                                                                                  │
+│   24 │   │   │   Path.cwd() / "pyproject.toml",                                                                                                                                  │
+│   25 │   │   │   overrides=overrides,                                                                                                                                            │
+│   26 │   │   )                                                                                                                                                                   │
+│ ❱ 27 │   │   command(**options)                                                                                                                                                  │
+│   28 │   except HelpText as e:                                                                                                                                                   │
+│   29 │   │   console.info()                                                                                                                                                      │
+│   30 │   │   console.info(str(e))                                                                                                                                                │
+│                                                                                                                                                                                  │
+│ ╭─────────────────────────────────────────────────────────────────────────────────── locals ───────────────────────────────────────────────────────────────────────────────────╮ │
+│ │       command = <briefcase.platforms.android.gradle.GradleRunCommand object at 0x000001967FC70440>                                                                           │ │
+│ │       console = <briefcase.console.Console object at 0x000001967F91E660>                                                                                                     │ │
+│ │             e = BriefcaseCommandError('Briefcase requires git, but it is not installed (or is not on your PATH). Visit:\n\n    https://git-scm.com/\n\nto download and       │ │
+│ │                 install git manually.\n\nIf you have installed git recently and are still getting this error, you may\nneed to restart your terminal session.\n')            │ │
+│ │ extra_cmdline = []                                                                                                                                                           │ │
+│ │       options = {                                                                                                                                                            │ │
+│ │                 │   'appname': None,                                                                                                                                         │ │
+│ │                 │   'update': False,                                                                                                                                         │ │
+│ │                 │   'update_requirements': False,                                                                                                                            │ │
+│ │                 │   'update_support': False,                                                                                                                                 │ │
+│ │                 │   'update_stub': False,                                                                                                                                    │ │
+│ │                 │   'update_resources': False,                                                                                                                               │ │
+│ │                 │   'no_update': False,                                                                                                                                      │ │
+│ │                 │   'test_mode': False,                                                                                                                                      │ │
+│ │                 │   'debugger': None,                                                                                                                                        │ │
+│ │                 │   'debugger_host': 'localhost',                                                                                                                            │ │
+│ │                 │   ... +8                                                                                                                                                   │ │
+│ │                 }                                                                                                                                                            │ │
+│ │     overrides = {}                                                                                                                                                           │ │
+│ │        result = 200                                                                                                                                                          │ │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯ │
+│                                                                                                                                                                                  │
+│ C:\Users\wasd6\PycharmProjects\WorkShiftCalendar\.venv\Lib\site-packages\briefcase\commands\run.py:404 in __call__                                                               │
+│                                                                                                                                                                                  │
+│   401 │   │   │   or (not exec_file.exists())  # Executable binary doesn't exist yet                                                                                             │
+│   402 │   │   │   or (app.test_mode and not no_update)  # Test mode, but updates are enabled                                                                                     │
+│   403 │   │   ):                                                                                                                                                                 │
+│ ❱ 404 │   │   │   state = self.build_command(                                                                                                                                    │
+│   405 │   │   │   │   app,                                                                                                                                                       │
+│   406 │   │   │   │   update=update,                                                                                                                                             │
+│   407 │   │   │   │   update_requirements=update_requirements,                                                                                                                   │
+│                                                                                                                                                                                  │
+│ ╭─────────────────────────────────────────────────────────────────────────────────── locals ───────────────────────────────────────────────────────────────────────────────────╮ │
+│ │                 app = <org.ia.wscalendar.wscalendar v0.1 FinalizedAppConfig>                                                                                                 │ │
+│ │             appname = None                                                                                                                                                   │ │
+│ │            debugger = None                                                                                                                                                   │ │
+│ │       debugger_host = 'localhost'                                                                                                                                            │ │
+│ │       debugger_port = 5678                                                                                                                                                   │ │
+│ │           exec_file = WindowsPath('C:/Users/wasd6/PycharmProjects/WorkShiftCalendar/build/WSCalendar/android/gradle/app/build/outputs/apk/debug/app-debug.apk')              │ │
+│ │           finalized = {'WSCalendar': <org.ia.wscalendar.wscalendar v0.1 FinalizedAppConfig>}                                                                                 │ │
+│ │           no_update = False                                                                                                                                                  │ │
+│ │             options = {                                                                                                                                                      │ │
+│ │                       │   'device_or_avd': 'auto',                                                                                                                           │ │
+│ │                       │   'extra_emulator_args': None,                                                                                                                       │ │
+│ │                       │   'shutdown_on_exit': False,                                                                                                                         │ │
+│ │                       │   'revoke_permissions': None,                                                                                                                        │ │
+│ │                       │   'forward_ports': None,                                                                                                                             │ │
+│ │                       │   'reverse_ports': None                                                                                                                              │ │
+│ │                       }                                                                                                                                                      │ │
+│ │         passthrough = []                                                                                                                                                     │ │
+│ │                self = <briefcase.platforms.android.gradle.GradleRunCommand object at 0x000001967FC70440>                                                                     │ │
+│ │       template_file = WindowsPath('C:/Users/wasd6/PycharmProjects/WorkShiftCalendar/build/WSCalendar/android/gradle')                                                        │ │
+│ │           test_mode = False                                                                                                                                                  │ │
+│ │              update = False                                                                                                                                                  │ │
+│ │ update_requirements = False                                                                                                                                                  │ │
+│ │    update_resources = False                                                                                                                                                  │ │
+│ │         update_stub = False                                                                                                                                                  │ │
+│ │      update_support = False                                                                                                                                                  │ │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯ │
+│                                                                                                                                                                                  │
+│ C:\Users\wasd6\PycharmProjects\WorkShiftCalendar\.venv\Lib\site-packages\briefcase\commands\build.py:153 in __call__                                                             │
+│                                                                                                                                                                                  │
+│   150 │   │                                                                                                                                                                      │
+│   151 │   │   state = None                                                                                                                                                       │
+│   152 │   │   for _, app_obj in sorted(finalized_apps.items()):                                                                                                                  │
+│ ❱ 153 │   │   │   state = self._build_app(                                                                                                                                       │
+│   154 │   │   │   │   app_obj,                                                                                                                                                   │
+│   155 │   │   │   │   update=update,                                                                                                                                             │
+│   156 │   │   │   │   update_requirements=update_requirements,                                                                                                                   │
+│                                                                                                                                                                                  │
+│ ╭────────────────────────────────────────────────── locals ──────────────────────────────────────────────────╮                                                                   │
+│ │                   _ = 'WSCalendar'                                                                         │                                                                   │
+│ │                 app = <org.ia.wscalendar.wscalendar v0.1 FinalizedAppConfig>                               │                                                                   │
+│ │            app_name = None                                                                                 │                                                                   │
+│ │             app_obj = <org.ia.wscalendar.wscalendar v0.1 FinalizedAppConfig>                               │                                                                   │
+│ │       apps_to_build = {'WSCalendar': <org.ia.wscalendar.wscalendar v0.1 FinalizedAppConfig>}               │                                                                   │
+│ │            debugger = None                                                                                 │                                                                   │
+│ │      finalized_apps = {'WSCalendar': <org.ia.wscalendar.wscalendar v0.1 FinalizedAppConfig>}               │                                                                   │
+│ │           no_update = False                                                                                │                                                                   │
+│ │             options = {                                                                                    │                                                                   │
+│ │                       │   'device_or_avd': 'auto',                                                         │                                                                   │
+│ │                       │   'extra_emulator_args': None,                                                     │                                                                   │
+│ │                       │   'shutdown_on_exit': False,                                                       │                                                                   │
+│ │                       │   'revoke_permissions': None,                                                      │                                                                   │
+│ │                       │   'forward_ports': None,                                                           │                                                                   │
+│ │                       │   'reverse_ports': None                                                            │                                                                   │
+│ │                       }                                                                                    │                                                                   │
+│ │                self = <briefcase.platforms.android.gradle.GradleBuildCommand object at 0x000001967FC71E80> │                                                                   │
+│ │               state = None                                                                                 │                                                                   │
+│ │           test_mode = False                                                                                │                                                                   │
+│ │              update = False                                                                                │                                                                   │
+│ │ update_requirements = False                                                                                │                                                                   │
+│ │    update_resources = False                                                                                │                                                                   │
+│ │         update_stub = False                                                                                │                                                                   │
+│ │      update_support = False                                                                                │                                                                   │
+│ ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                   │
+│                                                                                                                                                                                  │
+│ C:\Users\wasd6\PycharmProjects\WorkShiftCalendar\.venv\Lib\site-packages\briefcase\commands\build.py:69 in _build_app                                                            │
+│                                                                                                                                                                                  │
+│    66 │   │   │   )                                                                                                                                                              │
+│    67 │   │                                                                                                                                                                      │
+│    68 │   │   if not self.bundle_path(app).exists():                                                                                                                             │
+│ ❱  69 │   │   │   state = self.create_command(app, **options)                                                                                                                    │
+│    70 │   │   elif (                                                                                                                                                             │
+│    71 │   │   │   update  # An explicit update has been requested                                                                                                                │
+│    72 │   │   │   or update_requirements  # An explicit requirements update has been requested                                                                                   │
+│                                                                                                                                                                                  │
+│ ╭────────────────────────────────────────────────── locals ──────────────────────────────────────────────────╮                                                                   │
+│ │                 app = <org.ia.wscalendar.wscalendar v0.1 FinalizedAppConfig>                               │                                                                   │
+│ │           no_update = False                                                                                │                                                                   │
+│ │             options = {                                                                                    │                                                                   │
+│ │                       │   'device_or_avd': 'auto',                                                         │                                                                   │
+│ │                       │   'extra_emulator_args': None,                                                     │                                                                   │
+│ │                       │   'shutdown_on_exit': False,                                                       │                                                                   │
+│ │                       │   'revoke_permissions': None,                                                      │                                                                   │
+│ │                       │   'forward_ports': None,                                                           │                                                                   │
+│ │                       │   'reverse_ports': None                                                            │                                                                   │
+│ │                       }                                                                                    │                                                                   │
+│ │                self = <briefcase.platforms.android.gradle.GradleBuildCommand object at 0x000001967FC71E80> │                                                                   │
+│ │              update = False                                                                                │                                                                   │
+│ │ update_requirements = False                                                                                │                                                                   │
+│ │    update_resources = False                                                                                │                                                                   │
+│ │         update_stub = False                                                                                │                                                                   │
+│ │      update_support = False                                                                                │                                                                   │
+│ ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                   │
+│                                                                                                                                                                                  │
+│ C:\Users\wasd6\PycharmProjects\WorkShiftCalendar\.venv\Lib\site-packages\briefcase\commands\create.py:1083 in __call__                                                           │
+│                                                                                                                                                                                  │
+│   1080 │   │                                                                                                                                                                     │
+│   1081 │   │   # Confirm host compatibility, that all required tools are available,                                                                                              │
+│   1082 │   │   # and finalize configurations for the apps that will be created.                                                                                                  │
+│ ❱ 1083 │   │   finalized_apps = self.finalize(apps=apps_to_create.values())                                                                                                      │
+│   1084 │   │                                                                                                                                                                     │
+│   1085 │   │   state = None                                                                                                                                                      │
+│   1086 │   │   for _, app_obj in sorted(finalized_apps.items()):                                                                                                                 │
+│                                                                                                                                                                                  │
+│ ╭─────────────────────────────────────────────────────────────────────────────────── locals ───────────────────────────────────────────────────────────────────────────────────╮ │
+│ │            app = <org.ia.wscalendar.wscalendar v0.1 FinalizedAppConfig>                                                                                                      │ │
+│ │       app_name = None                                                                                                                                                        │ │
+│ │ apps_to_create = {'WSCalendar': <org.ia.wscalendar.wscalendar v0.1 FinalizedAppConfig>}                                                                                      │ │
+│ │        options = {'device_or_avd': 'auto', 'extra_emulator_args': None, 'shutdown_on_exit': False, 'revoke_permissions': None, 'forward_ports': None, 'reverse_ports': None} │ │
+│ │           self = <briefcase.platforms.android.gradle.GradleCreateCommand object at 0x000001967FC72510>                                                                       │ │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯ │
+│                                                                                                                                                                                  │
+│ C:\Users\wasd6\PycharmProjects\WorkShiftCalendar\.venv\Lib\site-packages\briefcase\commands\base.py:826 in finalize                                                              │
+│                                                                                                                                                                                  │
+│    823 │   │   :returns: A dict mapping app name to finalized app configs.                                                                                                       │
+│    824 │   │   """                                                                                                                                                               │
+│    825 │   │   self.verify_host()                                                                                                                                                │
+│ ❱  826 │   │   self.verify_tools()                                                                                                                                               │
+│    827 │   │                                                                                                                                                                     │
+│    828 │   │   finalized: dict[str, FinalizedAppConfig] = {}                                                                                                                     │
+│    829 │   │   for app in apps:                                                                                                                                                  │
+│                                                                                                                                                                                  │
+│ ╭─────────────────────────────────────────────── locals ────────────────────────────────────────────────╮                                                                        │
+│ │          apps = dict_values([<org.ia.wscalendar.wscalendar v0.1 FinalizedAppConfig>])                 │                                                                        │
+│ │      debugger = None                                                                                  │                                                                        │
+│ │ debugger_host = None                                                                                  │                                                                        │
+│ │ debugger_port = None                                                                                  │                                                                        │
+│ │          self = <briefcase.platforms.android.gradle.GradleCreateCommand object at 0x000001967FC72510> │                                                                        │
+│ │     test_mode = False                                                                                 │                                                                        │
+│ ╰───────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                        │
+│                                                                                                                                                                                  │
+│ C:\Users\wasd6\PycharmProjects\WorkShiftCalendar\.venv\Lib\site-packages\briefcase\platforms\android\gradle.py:160 in verify_tools                                               │
+│                                                                                                                                                                                  │
+│   157 │   def verify_tools(self):                                                                                                                                                │
+│   158 │   │   """Verify that the Android APK tools in `briefcase` will operate on this system,                                                                                   │
+│   159 │   │   downloading tools as needed."""                                                                                                                                    │
+│ ❱ 160 │   │   super().verify_tools()                                                                                                                                             │
+│   161 │   │   AndroidSDK.verify(tools=self.tools)                                                                                                                                │
+│   162 │   │   if not self.is_clone:                                                                                                                                              │
+│   163 │   │   │   self.console.add_log_file_extra(self.tools.android_sdk.list_packages)                                                                                          │
+│                                                                                                                                                                                  │
+│ ╭─────────────────────────────────────────── locals ───────────────────────────────────────────╮                                                                                 │
+│ │ self = <briefcase.platforms.android.gradle.GradleCreateCommand object at 0x000001967FC72510> │                                                                                 │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────╯                                                                                 │
+│                                                                                                                                                                                  │
+│ C:\Users\wasd6\PycharmProjects\WorkShiftCalendar\.venv\Lib\site-packages\briefcase\commands\create.py:1066 in verify_tools                                                       │
+│                                                                                                                                                                                  │
+│   1063 │   │   Raises MissingToolException if a required system tool is missing.                                                                                                 │
+│   1064 │   │   """                                                                                                                                                               │
+│   1065 │   │   super().verify_tools()                                                                                                                                            │
+│ ❱ 1066 │   │   Git.verify(tools=self.tools)                                                                                                                                      │
+│   1067 │                                                                                                                                                                         │
+│   1068 │   def verify_app_tools(self, app: FinalizedAppConfig):                                                                                                                  │
+│   1069 │   │   """Verify that tools needed to run the command for this app exist."""                                                                                             │
+│                                                                                                                                                                                  │
+│ ╭─────────────────────────────────────────── locals ───────────────────────────────────────────╮                                                                                 │
+│ │ self = <briefcase.platforms.android.gradle.GradleCreateCommand object at 0x000001967FC72510> │                                                                                 │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────╯                                                                                 │
+│                                                                                                                                                                                  │
+│ C:\Users\wasd6\PycharmProjects\WorkShiftCalendar\.venv\Lib\site-packages\briefcase\integrations\base.py:81 in verify                                                             │
+│                                                                                                                                                                                  │
+│    78 │   ) -> Self:                                                                           ╭─────────────────────────────────── locals ────────────────────────────────────╮ │
+│    79 │   │   """Confirm the tool is available and usable on the host platform."""             │    app = None                                                                 │ │
+│    80 │   │   cls.verify_host(tools=tools)                                                     │ kwargs = {}                                                                   │ │
+│ ❱  81 │   │   tool = cls.verify_install(tools=tools, app=app, **kwargs)                        │  tools = <briefcase.integrations.base.ToolCache object at 0x000001967FC70C20> │ │
+│    82 │   │   return tool                                                                      ╰───────────────────────────────────────────────────────────────────────────────╯ │
+│    83 │                                                                                                                                                                          │
+│    84 │   @classmethod                                                                                                                                                           │
+│                                                                                                                                                                                  │
+│ C:\Users\wasd6\PycharmProjects\WorkShiftCalendar\.venv\Lib\site-packages\briefcase\integrations\git.py:65 in verify_install                                                      │
+│                                                                                                                                                                                  │
+│   62 │   │   │   │   ) from e                                                                 ╭─────────────────────────────────── locals ────────────────────────────────────╮  │
+│   63 │   │   │                                                                                │ kwargs = {'app': None}                                                        │  │
+│   64 │   │   │   else:                                                                        │  tools = <briefcase.integrations.base.ToolCache object at 0x000001967FC70C20> │  │
+│ ❱ 65 │   │   │   │   raise BriefcaseCommandError(                                             ╰───────────────────────────────────────────────────────────────────────────────╯  │
+│   66 │   │   │   │   │   f"""\                                                                                                                                                   │
+│   67 Briefcase requires git, but it is not installed (or is not on your PATH). Visit:                                                                                            │
+│   68                                                                                                                                                                             │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+BriefcaseCommandError: Briefcase requires git, but it is not installed (or is not on your PATH). Visit:
+
+    https://git-scm.com/
+
+to download and install git manually.
+
+If you have installed git recently and are still getting this error, you may
+need to restart your terminal session.
+
+           Collecting extra information for log... started                                                                                                            console.py:604
+                                                                                                                                                                      console.py:608
+           Extra information:                                                                                                                                         console.py:609
+                                                                                                                                                                   subprocess.py:845
+           >>> Running Command:                                                                                                                                    subprocess.py:845
+           >>>     'C:\Users\wasd6\AppData\Local\BeeWare\briefcase\Cache\tools\android_sdk\cmdline-tools\19.0\bin\sdkmanager.bat' --list_installed                 subprocess.py:845
+           >>> Working Directory:                                                                                                                                  subprocess.py:845
+           >>>     C:\Users\wasd6\PycharmProjects\WorkShiftCalendar                                                                                                subprocess.py:845
+           >>> Environment Overrides:                                                                                                                              subprocess.py:845
+           >>>     ANDROID_HOME=C:\Users\wasd6\AppData\Local\BeeWare\briefcase\Cache\tools\android_sdk                                                             subprocess.py:845
+           >>>     ANDROID_SDK_ROOT=C:\Users\wasd6\AppData\Local\BeeWare\briefcase\Cache\tools\android_sdk                                                         subprocess.py:845
+           >>>     JAVA_HOME=C:\Users\wasd6\AppData\Local\BeeWare\briefcase\Cache\tools\java17                                                                     subprocess.py:845
+[09:35:01] >>> Command Output:                                                                                                                                     subprocess.py:845
+           >>>     Loading package information...                                                                                                                  subprocess.py:845
+           >>>     Loading local repository...                                                                                                                     subprocess.py:845
+           >>>     [=========                              ] 25% Loading local repository...                                                                       subprocess.py:845
+           >>>     [=========                              ] 25% Fetch remote repository...                                                                        subprocess.py:845
+           >>>     [=======================================] 100% Fetch remote repository...                                                                       subprocess.py:845
+           >>>                                                                                                                                                     subprocess.py:845
+           >>>     Installed packages:                                                                                                                             subprocess.py:845
+           >>>       Path           | Version | Description                | Location                                                                              subprocess.py:845
+           >>>       -------        | ------- | -------                    | -------                                                                               subprocess.py:845
+           >>>       emulator       | 37.2.12 | Android Emulator           | emulator                                                                              subprocess.py:845
+           >>>       platform-tools | 37.0.1  | Android SDK Platform-Tools | platform-tools                                                                        subprocess.py:845
+           >>>                                                                                                                                                     subprocess.py:845
+           >>> Return code: 0                                                                                                                                      subprocess.py:845
+                                                                                                                                                                   subprocess.py:845
+           Collecting extra information for log... done                                                                                                               console.py:604

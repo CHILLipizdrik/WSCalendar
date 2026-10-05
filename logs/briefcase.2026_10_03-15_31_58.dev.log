@@ -1,0 +1,285 @@
+Date/Time:       2026-10-03 15:31:58 
+Command line:    C:\Users\wasd6\PycharmProjects\WorkShiftCalendar\.venv\Scripts\briefcase dev
+
+OS Release:      Windows 11
+OS Version:      10.0.26200
+Architecture:    AMD64
+Platform:        Windows-11-10.0.26200-SP0
+
+Python exe:      C:\Users\wasd6\PycharmProjects\WorkShiftCalendar\.venv\Scripts\python.exe
+Python version:  3.14.8 (tags/v3.14.8:8e6e75d, Sep 30 2026, 18:19:33) [MSC v.1944 64 bit (AMD64)]
+Virtual env:     True
+Conda env:       False
+
+Briefcase:       0.4.5
+Target platform: windows
+Target format:   app
+
+Environment Variables:
+	ALLUSERSPROFILE=C:\ProgramData
+	APPDATA=C:\Users\wasd6\AppData\Roaming
+	COMMONPROGRAMFILES=C:\Program Files\Common Files
+	COMMONPROGRAMFILES(X86)=C:\Program Files (x86)\Common Files
+	COMMONPROGRAMW6432=C:\Program Files\Common Files
+	COMPUTERNAME=CHILLIPIZDRIKK
+	COMSPEC=C:\WINDOWS\system32\cmd.exe
+	DRIVERDATA=C:\Windows\System32\Drivers\DriverData
+	EFC_8724_1592913036=1
+	EFC_8724_4126798990=1
+	FIG_TERM=1
+	HOMEDRIVE=C:
+	HOMEPATH=\Users\wasd6
+	INTELLIJ_TERMINAL_COMMAND_BLOCKS_REWORKED=1
+	LOCALAPPDATA=C:\Users\wasd6\AppData\Local
+	LOGONSERVER=\\CHILLIPIZDRIKK
+	NLS_LANG=RUSSIAN_RUSSIA.CL8MSWIN1251
+	NUMBER_OF_PROCESSORS=12
+	ONEDRIVE=C:\Users\wasd6\OneDrive
+	ONEDRIVECONSUMER=C:\Users\wasd6\OneDrive
+	OS=Windows_NT
+	PATH=C:\Users\wasd6\PycharmProjects\WorkShiftCalendar\.venv/Scripts;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Users\wasd6\AppData\Local\Programs\Python\Python314\Scripts\;C:\Users\wasd6\AppData\Local\Programs\Python\Python314\;C:\Users\wasd6\AppData\Local\Microsoft\WindowsApps;C:\Users\wasd6\AppData\Local\Python\bin;D:\workworkwork\PyCharm 2025.3.3\bin;C:\Oracle;C:\Users\wasd6\AppData\Local\GitHubDesktop\bin
+	PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL
+	PROCESSOR_ARCHITECTURE=AMD64
+	PROCESSOR_IDENTIFIER=AMD64 Family 23 Model 104 Stepping 1, AuthenticAMD
+	PROCESSOR_LEVEL=23
+	PROCESSOR_REVISION=6801
+	PROCESS_LAUNCHED_BY_CW=1
+	PROCESS_LAUNCHED_BY_Q=1
+	PROGRAMDATA=C:\ProgramData
+	PROGRAMFILES=C:\Program Files
+	PROGRAMFILES(X86)=C:\Program Files (x86)
+	PROGRAMW6432=C:\Program Files
+	PSEXECUTIONPOLICYPREFERENCE=Bypass
+	PSMODULEPATH=C:\Users\wasd6\OneDrive\Документы\WindowsPowerShell\Modules;C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
+	PUBLIC=C:\Users\Public
+	PYCHARM=D:\workworkwork\PyCharm 2025.3.3\bin
+	SESSIONNAME=Console
+	SYSTEMDRIVE=C:
+	SYSTEMROOT=C:\WINDOWS
+	TEMP=C:\Users\wasd6\AppData\Local\Temp
+	TERMINAL_EMULATOR=JetBrains-JediTerm
+	TERM_SESSION_ID=d05a1e95-565d-4185-8ab6-37ac9f0e47f7
+	TMP=C:\Users\wasd6\AppData\Local\Temp
+	TNS_ADMIN=C:\Oracle
+	USERDOMAIN=CHILLIPIZDRIKK
+	USERDOMAIN_ROAMINGPROFILE=CHILLIPIZDRIKK
+	USERNAME=wasd6
+	USERPROFILE=C:\Users\wasd6
+	VIRTUAL_ENV=C:\Users\wasd6\PycharmProjects\WorkShiftCalendar\.venv
+	VIRTUAL_ENV_PROMPT=.venv
+	WINDIR=C:\WINDOWS
+
+pyproject.toml:
+[tool.briefcase]
+project_name = "WorkShiftCalendar"
+bundle = "org.ia.wscalendar"
+version = "0.1"
+license = "MIT"
+author = "CHILLipizdrikk"
+author_email = "wasd666player@gmail.com"
+
+[tool.briefcase.app.WSCalendar]
+formal_name = "Календарь рабочих смен"
+description = "Календарь отслеживания рабочего графика"
+sources = ["src/WSCalendar"]
+requires = [
+    "toga-core",
+    "toga-android",
+    "plyer",
+    "pyjnius",
+]
+
+[tool.briefcase.app.WSCalendar.android]
+permission."android.permission.POST_NOTIFICATIONS" = true
+permission."android.permission.SCHEDULE_EXACT_ALARM" = true
+
+# Опционально: дополнительные записи в манифест
+# android_manifest_extra_content = """
+# <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+# """
+
+Briefcase Log:
+[15:31:49]                                                                                                                                                                dev.py:295
+           [WSCalendar] Activating dev environment...                                                                                                                     dev.py:295
+           Creating virtual environment (venv-dev.cp314-win_amd64)... started                                                                                             venv.py:42
+                                                                                                                                                                   subprocess.py:845
+           >>> Running Command:                                                                                                                                    subprocess.py:845
+           >>>     'C:\Users\wasd6\PycharmProjects\WorkShiftCalendar\.venv\Scripts\python.exe' -m venv --without-pip                                               subprocess.py:845
+           'C:\Users\wasd6\PycharmProjects\WorkShiftCalendar\.briefcase\WSCalendar\venv-dev.cp314-win_amd64'                                                                        
+           >>> Working Directory:                                                                                                                                  subprocess.py:845
+           >>>     C:\Users\wasd6\PycharmProjects\WorkShiftCalendar                                                                                                subprocess.py:845
+           >>> Return code: 0                                                                                                                                      subprocess.py:845
+                                                                                                                                                                   subprocess.py:845
+           Creating virtual environment (venv-dev.cp314-win_amd64)... done                                                                                                venv.py:42
+                                                                                                                                                                          dev.py:311
+           [WSCalendar] Installing requirements...                                                                                                                        dev.py:311
+           Installing dev requirements... started                                                                                                                         dev.py:113
+                                                                                                                                                                   subprocess.py:845
+           >>> Running Command:                                                                                                                                    subprocess.py:845
+           >>>     'C:\Users\wasd6\PycharmProjects\WorkShiftCalendar\.venv\Scripts\python.exe' -u -X utf8 -m pip --python                                          subprocess.py:845
+           'C:\Users\wasd6\PycharmProjects\WorkShiftCalendar\.briefcase\WSCalendar\venv-dev.cp314-win_amd64\Scripts\python.exe' install                                             
+           --disable-pip-version-check --no-user --upgrade toga-core toga-android plyer pyjnius                                                                                     
+           >>> Working Directory:                                                                                                                                  subprocess.py:845
+           >>>     C:\Users\wasd6\PycharmProjects\WorkShiftCalendar                                                                                                subprocess.py:845
+[15:31:52] Collecting toga-core                                                                                                                                    subprocess.py:196
+             Using cached toga_core-0.5.7-py3-none-any.whl.metadata (4.0 kB)                                                                                       subprocess.py:196
+           Collecting toga-android                                                                                                                                 subprocess.py:196
+             Using cached toga_android-0.5.7-py3-none-any.whl.metadata (3.3 kB)                                                                                    subprocess.py:196
+           Collecting plyer                                                                                                                                        subprocess.py:196
+             Using cached plyer-2.1.0-py2.py3-none-any.whl.metadata (61 kB)                                                                                        subprocess.py:196
+[15:31:53] Collecting pyjnius                                                                                                                                      subprocess.py:196
+             Using cached pyjnius-1.7.0-cp314-cp314-win_amd64.whl.metadata (14 kB)                                                                                 subprocess.py:196
+           Collecting travertino==0.5.7 (from toga-core)                                                                                                           subprocess.py:196
+             Using cached travertino-0.5.7-py3-none-any.whl.metadata (3.0 kB)                                                                                      subprocess.py:196
+           Using cached toga_core-0.5.7-py3-none-any.whl (170 kB)                                                                                                  subprocess.py:196
+           Using cached travertino-0.5.7-py3-none-any.whl (26 kB)                                                                                                  subprocess.py:196
+           Using cached toga_android-0.5.7-py3-none-any.whl (76 kB)                                                                                                subprocess.py:196
+           Using cached plyer-2.1.0-py2.py3-none-any.whl (142 kB)                                                                                                  subprocess.py:196
+           Using cached pyjnius-1.7.0-cp314-cp314-win_amd64.whl (212 kB)                                                                                           subprocess.py:196
+           Installing collected packages: pyjnius, plyer, travertino, toga-core, toga-android                                                                      subprocess.py:196
+[15:31:58]                                                                                                                                                         subprocess.py:196
+           Successfully installed plyer-2.1.0 pyjnius-1.7.0 toga-android-0.5.7 toga-core-0.5.7 travertino-0.5.7                                                    subprocess.py:196
+           >>> Return code: 0                                                                                                                                      subprocess.py:845
+                                                                                                                                                                   subprocess.py:845
+           Installing dev requirements... done                                                                                                                            dev.py:113
+                                                                                                                                                                          dev.py:331
+           [WSCalendar] Starting in dev mode...                                                                                                                           dev.py:331
+                                                                                                                                                                   subprocess.py:845
+           >>> Running Command:                                                                                                                                    subprocess.py:845
+           >>>     'C:\Users\wasd6\PycharmProjects\WorkShiftCalendar\.briefcase\WSCalendar\venv-dev.cp314-win_amd64\Scripts\python.exe' -c 'import runpy,          subprocess.py:845
+           sys;sys.path.pop(0);sys.argv.extend([]);runpy.run_module("WSCalendar", run_name="__main__", alter_sys=True)'                                                             
+           >>> Working Directory:                                                                                                                                  subprocess.py:845
+           >>>     C:\Users\wasd6                                                                                                                                  subprocess.py:845
+           >>> Environment Overrides:                                                                                                                              subprocess.py:845
+           >>>     PYTHONPATH=C:\Users\wasd6\PycharmProjects\WorkShiftCalendar\src                                                                                 subprocess.py:845
+           >>>     PYTHONMALLOC=default                                                                                                                            subprocess.py:845
+           >>>     PYTHONUNBUFFERED=1                                                                                                                              subprocess.py:845
+           >>>     PYTHONDEVMODE=1                                                                                                                                 subprocess.py:845
+           >>>     PYTHONUTF8=1                                                                                                                                    subprocess.py:845
+           >>>                                                                                                                                                     subprocess.py:845
+           PATH=C:\Users\wasd6\PycharmProjects\WorkShiftCalendar\.briefcase\WSCalendar\venv-dev.cp314-win_amd64\Scripts;C:\Users\wasd6\PycharmProjects\WorkShiftCa                  
+           lendar\.venv/Scripts;C:\Program Files (x86)\Common                                                                                                                       
+           Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\Open                  
+           SSH\;C:\Users\wasd6\AppData\Local\Programs\Python\Python314\Scripts\;C:\Users\wasd6\AppData\Local\Programs\Python\Python314\;C:\Users\wasd6\AppData\Loc                  
+           al\Microsoft\WindowsApps;C:\Users\wasd6\AppData\Local\Python\bin;D:\workworkwork\PyCharm                                                                                 
+           2025.3.3\bin;C:\Oracle;C:\Users\wasd6\AppData\Local\GitHubDesktop\bin                                                                                                    
+           >>>     VIRTUAL_ENV=C:\Users\wasd6\PycharmProjects\WorkShiftCalendar\.briefcase\WSCalendar\venv-dev.cp314-win_amd64                                     subprocess.py:845
+           ===========================================================================                                                                                    run.py:175
+           Traceback (most recent call last):                                                                                                                      subprocess.py:196
+             File "<string>", line 1, in <module>                                                                                                                  subprocess.py:196
+               import runpy, sys;sys.path.pop(0);sys.argv.extend([]);runpy.run_module("WSCalendar", run_name="__main__", alter_sys=True)                           subprocess.py:196
+                                                                     ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                           subprocess.py:196
+             File "<frozen runpy>", line 231, in run_module                                                                                                        subprocess.py:196
+             File "<frozen runpy>", line 98, in _run_module_code                                                                                                   subprocess.py:196
+             File "<frozen runpy>", line 88, in _run_code                                                                                                          subprocess.py:196
+             File "C:\Users\wasd6\PycharmProjects\WorkShiftCalendar\src\WSCalendar\__main__.py", line 1, in <module>                                               subprocess.py:196
+               from main import main                                                                                                                               subprocess.py:196
+           ModuleNotFoundError: No module named 'main'                                                                                                             subprocess.py:196
+                                                                                                                                                                      __main__.py:42
+           Problem running app WSCalendar (return code 1).                                                                                                            __main__.py:43
+           Saving log... started                                                                                                                                      console.py:566
+
+Main thread traceback:
+╭─────────────────────────────────────────────────────────────────────── Traceback (most recent call last) ────────────────────────────────────────────────────────────────────────╮
+│ C:\Users\wasd6\PycharmProjects\WorkShiftCalendar\.venv\Lib\site-packages\briefcase\__main__.py:27 in main                                                                        │
+│                                                                                                                                                                                  │
+│   24 │   │   │   Path.cwd() / "pyproject.toml",                                                                                                                                  │
+│   25 │   │   │   overrides=overrides,                                                                                                                                            │
+│   26 │   │   )                                                                                                                                                                   │
+│ ❱ 27 │   │   command(**options)                                                                                                                                                  │
+│   28 │   except HelpText as e:                                                                                                                                                   │
+│   29 │   │   console.info()                                                                                                                                                      │
+│   30 │   │   console.info(str(e))                                                                                                                                                │
+│                                                                                                                                                                                  │
+│ ╭───────────────────────────────────────────────────────────────── locals ──────────────────────────────────────────────────────────────────╮                                    │
+│ │       command = <briefcase.platforms.windows.app.WindowsAppDevCommand object at 0x0000019292700440>                                       │                                    │
+│ │       console = <briefcase.console.Console object at 0x000001929241E660>                                                                  │                                    │
+│ │             e = BriefcaseCommandError('Problem running app WSCalendar (return code 1).')                                                  │                                    │
+│ │ extra_cmdline = []                                                                                                                        │                                    │
+│ │       options = {'appname': None, 'update_requirements': False, 'isolated': True, 'run_app': True, 'test_mode': False, 'passthrough': []} │                                    │
+│ │     overrides = {}                                                                                                                        │                                    │
+│ │        result = 200                                                                                                                       │                                    │
+│ ╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                    │
+│                                                                                                                                                                                  │
+│ C:\Users\wasd6\PycharmProjects\WorkShiftCalendar\.venv\Lib\site-packages\briefcase\commands\dev.py:332 in __call__                                                               │
+│                                                                                                                                                                                  │
+│   329 │   │   │   │   )                                                                                                                                                          │
+│   330 │   │   │   else:                                                                                                                                                          │
+│   331 │   │   │   │   self.console.info("Starting in dev mode...", prefix=app.app_name)                                                                                          │
+│ ❱ 332 │   │   │   return self.run_dev_app(                                                                                                                                       │
+│   333 │   │   │   │   app,                                                                                                                                                       │
+│   334 │   │   │   │   env=self.get_environment(app),                                                                                                                             │
+│   335 │   │   │   │   venv=venv,                                                                                                                                                 │
+│                                                                                                                                                                                  │
+│ ╭────────────────────────────────────────────────────────── locals ───────────────────────────────────────────────────────────╮                                                  │
+│ │                 app = <org.ia.wscalendar.wscalendar v0.1 FinalizedAppConfig>                                                │                                                  │
+│ │             appname = None                                                                                                  │                                                  │
+│ │             created = True                                                                                                  │                                                  │
+│ │         env_manager = 'venv'                                                                                                │                                                  │
+│ │           finalized = {'WSCalendar': <org.ia.wscalendar.wscalendar v0.1 FinalizedAppConfig>}                                │                                                  │
+│ │            isolated = True                                                                                                  │                                                  │
+│ │             options = {}                                                                                                    │                                                  │
+│ │         passthrough = []                                                                                                    │                                                  │
+│ │             run_app = True                                                                                                  │                                                  │
+│ │                self = <briefcase.platforms.windows.app.WindowsAppDevCommand object at 0x0000019292700440>                   │                                                  │
+│ │           test_mode = False                                                                                                 │                                                  │
+│ │ update_requirements = False                                                                                                 │                                                  │
+│ │                venv = <briefcase.integrations.virtual_environment.venv.VenvVirtualEnvironment object at 0x0000019292701BE0> │                                                  │
+│ ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                  │
+│                                                                                                                                                                                  │
+│ C:\Users\wasd6\PycharmProjects\WorkShiftCalendar\.venv\Lib\site-packages\briefcase\commands\dev.py:180 in run_dev_app                                                            │
+│                                                                                                                                                                                  │
+│   177 │   │   │   )                                                                                                                                                              │
+│   178 │   │   │                                                                                                                                                                  │
+│   179 │   │   │   # Start streaming logs for the app.                                                                                                                            │
+│ ❱ 180 │   │   │   self._stream_app_logs(                                                                                                                                         │
+│   181 │   │   │   │   app,                                                                                                                                                       │
+│   182 │   │   │   │   popen=app_popen,                                                                                                                                           │
+│   183 │   │   │   │   clean_output=False,                                                                                                                                        │
+│                                                                                                                                                                                  │
+│ ╭────────────────────────────────────────────────────── locals ───────────────────────────────────────────────────────╮                                                          │
+│ │         app = <org.ia.wscalendar.wscalendar v0.1 FinalizedAppConfig>                                                │                                                          │
+│ │   app_popen = <Popen: returncode: 1 args: ['C:\\Users\\wasd6\\PycharmProjects\\WorkShiftCa...>                      │                                                          │
+│ │     cmdline = [                                                                                                     │                                                          │
+│ │               │   'C:\\Users\\wasd6\\PycharmProjects\\WorkShiftCalendar\\.venv\\Scripts\\python.exe',               │                                                          │
+│ │               │   '-c',                                                                                             │                                                          │
+│ │               │   'import runpy, sys;sys.path.pop(0);sys.argv.extend([]);runpy.run_module("WSCalend'+41             │                                                          │
+│ │               ]                                                                                                     │                                                          │
+│ │         env = {                                                                                                     │                                                          │
+│ │               │   'PYTHONPATH': 'C:\\Users\\wasd6\\PycharmProjects\\WorkShiftCalendar\\src',                        │                                                          │
+│ │               │   'PYTHONMALLOC': 'default',                                                                        │                                                          │
+│ │               │   'PYTHONUNBUFFERED': '1',                                                                          │                                                          │
+│ │               │   'PYTHONDEVMODE': '1',                                                                             │                                                          │
+│ │               │   'PYTHONUTF8': '1'                                                                                 │                                                          │
+│ │               }                                                                                                     │                                                          │
+│ │     env_key = 'PYTHONUTF8'                                                                                          │                                                          │
+│ │   env_value = '1'                                                                                                   │                                                          │
+│ │ main_module = 'WSCalendar'                                                                                          │                                                          │
+│ │     options = {}                                                                                                    │                                                          │
+│ │ passthrough = []                                                                                                    │                                                          │
+│ │        self = <briefcase.platforms.windows.app.WindowsAppDevCommand object at 0x0000019292700440>                   │                                                          │
+│ │        venv = <briefcase.integrations.virtual_environment.venv.VenvVirtualEnvironment object at 0x0000019292701BE0> │                                                          │
+│ ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                          │
+│                                                                                                                                                                                  │
+│ C:\Users\wasd6\PycharmProjects\WorkShiftCalendar\.venv\Lib\site-packages\briefcase\commands\run.py:212 in _stream_app_logs                                                       │
+│                                                                                                                                                                                  │
+│   209 │   │   │   │   # If we're monitoring an actual app (not just a log stream),                                                                                               │
+│   210 │   │   │   │   # and the app didn't exit cleanly, surface the error to the user.                                                                                          │
+│   211 │   │   │   │   if (status_code := popen.poll()) != 0:                                                                                                                     │
+│ ❱ 212 │   │   │   │   │   raise BriefcaseCommandError(                                                                                                                           │
+│   213 │   │   │   │   │   │   f"Problem running app {app.app_name} "                                                                                                             │
+│   214 │   │   │   │   │   │   f"(return code {status_code})."                                                                                                                    │
+│   215 │   │   │   │   │   )                                                                                                                                                      │
+│                                                                                                                                                                                  │
+│ ╭────────────────────────────────────────────── locals ──────────────────────────────────────────────╮                                                                           │
+│ │          app = <org.ia.wscalendar.wscalendar v0.1 FinalizedAppConfig>                              │                                                                           │
+│ │ clean_filter = None                                                                                │                                                                           │
+│ │ clean_output = False                                                                               │                                                                           │
+│ │   log_filter = <briefcase.commands.run.LogFilter object at 0x0000019292701FD0>                     │                                                                           │
+│ │   log_stream = False                                                                               │                                                                           │
+│ │        popen = <Popen: returncode: 1 args: ['C:\\Users\\wasd6\\PycharmProjects\\WorkShiftCa...>    │                                                                           │
+│ │         self = <briefcase.platforms.windows.app.WindowsAppDevCommand object at 0x0000019292700440> │                                                                           │
+│ │  status_code = 1                                                                                   │                                                                           │
+│ ╰────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                           │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+BriefcaseCommandError: Problem running app WSCalendar (return code 1).

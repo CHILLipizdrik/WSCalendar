@@ -8,43 +8,53 @@ from itertools import cycle
 
 # Создание месяца
 def create_month(year: int, month: int, schedule: list,
+                 day_hours: str = "-", night_hours: str = "-",
                  start_day: int = 1, offset: int = 0) -> dict:
-    """Создаёт структуру месяца.
-    schedule — шаблон графика, например [1, 1, 0, 0].
-    start_day — с какого дня месяца начинается цикл (дни до него = 0).
-    offset — с какой позиции schedule начинать (для продолжения между месяцами).
-    """
+    """Создаёт словарь дней месяца.
 
+    schedule — шаблон графика, например [1, 1, 0, 0].
+    day_hours / night_hours — часы работы для смен типа 1 и 2.
+    start_day — с какого дня начинается цикл (дни до него = выходные).
+    offset — с какой позиции schedule начинать.
+
+    Возвращает {день: [тип_смены, часы, заметка]}.
+    """
     if not schedule:
         raise ValueError("schedule не может быть пустым")
 
     days_in_month = calendar.monthrange(year, month)[1]
     start_day = max(1, min(start_day, days_in_month))
 
-    days = {str(d): 0 for d in range(1, start_day)}
+    days = {}
+
+    # Дни до start_day — выходные
+    for d in range(1, start_day):
+        days[str(d)] = [0, "-", ""]
 
     shifts = cycle(schedule)
-    # Прокручиваем цикл до начала позции
     for _ in range(offset):
         next(shifts)
 
-    for day in range(start_day, days_in_month + 1):
-        days[str(day)] = next(shifts)
+    for d in range(start_day, days_in_month + 1):
+        shift = next(shifts)
+        if shift == 0:
+            hours = "-"
+        elif shift == 1:
+            hours = day_hours
+        elif shift == 2:
+            hours = night_hours
+        else:
+            hours = "-"
+        days[str(d)] = [shift, hours, ""]
 
-    return {
-        "year": year,
-        "month": month,
-        "days": days
-    }
+    return days
+
 
 def create_empty_month(year: int, month: int) -> dict:
-    """Создаёт структуру месяца, где все дни = 0 (до начала работы)."""
+    """Месяц до начала работы — все дни выходные."""
     days_in_month = calendar.monthrange(year, month)[1]
-    return {
-        "year": year,
-        "month": month,
-        "days": {str(d): 0 for d in range(1, days_in_month + 1)},
-    }
+    return {str(d): [0, "-", ""] for d in range(1, days_in_month + 1)}
+
 
 # Добавление месяца в общий календарь
 def add_month_to_data(file_path: Path, year: int, month: int,
@@ -75,6 +85,8 @@ def add_month_to_data(file_path: Path, year: int, month: int,
         # Месяц старта — заполняем с дня anchor, цикл начинается с schedule[0]
         data[key] = create_month(
             year, month, schedule,
+            day_hours=user.day_hours,
+            night_hours=user.night_hours,
             start_day=anchor_date.day,
             offset=0,
         )
@@ -85,6 +97,8 @@ def add_month_to_data(file_path: Path, year: int, month: int,
         offset = (date(year, month, 1) - anchor_date).days % len(schedule)
         data[key] = create_month(
             year, month, schedule,
+            day_hours=user.day_hours,
+            night_hours=user.night_hours,
             start_day=1,
             offset=offset,
         )

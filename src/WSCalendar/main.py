@@ -547,10 +547,10 @@ class CalendarView(toga.Box):
     # ---------- Сетка месяца ----------
     def _make_month_grid(self, year: int, month: int) -> toga.Box:
         key = f"{year:04d}-{month:02d}"
-        month_data = self.data.get(key, {}).get("days", {})
+        month_data = self.data.get(key, {})
 
         days_in_month = calendar.monthrange(year, month)[1]
-        first_weekday = date(year, month, 1).weekday()  # 0 = ПНД
+        first_weekday = date(year, month, 1).weekday()
 
         grid = toga.Box(style=Pack(direction=COLUMN, background_color="#CCCCCC"))
 
@@ -564,14 +564,15 @@ class CalendarView(toga.Box):
                 cell_pos = row_idx * 7 + col_idx
 
                 if cell_pos < first_weekday or day > days_in_month:
-                    # Пустая ячейка
                     row.add(toga.Box(style=Pack(flex=1, height=40, margin=1)))
                 else:
-                    shift = month_data.get(str(day), 0)
+                    cell = month_data.get(str(day))
+                    # Ячейка может отсутствовать, если месяц ещё не сгенерирован
+                    shift = cell[0] if cell else 0
                     is_today = (
-                        year == self.today.year
-                        and month == self.today.month
-                        and day == self.today.day
+                            year == self.today.year
+                            and month == self.today.month
+                            and day == self.today.day
                     )
                     row.add(self._make_day_cell(day, shift, is_today))
                     day += 1
@@ -677,11 +678,9 @@ class WSCalendarApp(toga.App):
         """Сохраняет изменения профиля. При смене anchor или schedule — пересоздаёт календарь."""
         self.user.save_to_json(self.users_file)
 
-        if field in ("anchor", "schedule"):
-            # Полная перегенерация календаря: старые месяцы недействительны
+        if field in ("anchor", "schedule", "day_hours", "night_hours"):
             if self.calendar_file.exists():
                 self.calendar_file.unlink()
-
             today = date.today()
             CalendarFunc.add_month_to_data(
                 self.calendar_file,
