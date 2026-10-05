@@ -1,0 +1,29 @@
+[tool.briefcase]
+project_name = "WorkShiftCalendar"
+bundle = "org.ia.wscalendar"
+version = "0.1"
+license = "MIT"
+author = "CHILLipizdrikk"
+author_email = "wasd666player@gmail.com"
+
+[tool.briefcase.app.WSCalendar]
+formal_name = "Календарь рабочих смен"
+description = "Календарь отслеживания рабочего графика"
+sources = ["src/WSCalendar"]
+requires = [
+    "toga-core",
+    "plyer",
+]
+
+[tool.briefcase.app.WSCalendar.windows]
+requires = [
+    "toga-winforms",
+]
+
+[tool.briefcase.app.WSCalendar.android]
+requires = [
+    "toga-android",
+    "pyjnius",
+]
+permission."android.permission.POST_NOTIFICATIONS" = true
+permission."android.permission.SCHEDULE_EXACT_ALARM" = true
