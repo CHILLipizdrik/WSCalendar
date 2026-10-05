@@ -86,7 +86,7 @@ class RegistrationView(toga.Box):
 
         # 3. График
         try:
-            schedule = self.parse_schedule(self.schedule_input.value)
+            schedule = User.parse_schedule(self.schedule_input.value)
         except ValueError as e:
             self.error_label.text = str(e)
             return
@@ -99,7 +99,7 @@ class RegistrationView(toga.Box):
             "schedule": schedule,
         })
 
-    @staticmethod
+    """@staticmethod
     def parse_schedule(raw: str) -> list:
         raw = raw.strip().replace(" ", "")
         if not raw:
@@ -118,17 +118,156 @@ class RegistrationView(toga.Box):
         if not schedule:
             raise ValueError("График не может быть пустым")
 
-        return schedule
+        return schedule"""
+
+
+class ProfileView(toga.Box):
+    """Страница профиля с inline-редактированием полей."""
+
+    # (имя_атрибута, отображаемое название)
+    FIELDS = [
+        ("name", "Имя"),
+        ("anchor", "Дата начала работы"),
+        ("schedule", "График"),
+    ]
+
+    def __init__(self, user: User, on_save, on_back, on_reset=None):
+        super().__init__(style=Pack(direction=COLUMN, margin=20))
+        self.user = user
+        self.on_save = on_save       # callback(field_name) — вызывается после успешного изменения
+        self.on_back = on_back       # callback() — возврат к календарю
+        self.on_reset = on_reset     # - сброс профиля
+
+        self.add(
+            toga.Label(
+                "Профиль",
+                style=Pack(font_size=20, margin_bottom=15, text_align=CENTER),
+            )
+        )
+
+        # Контейнеры для строк — чтобы можно было перерисовывать по одной
+        self.row_containers: dict[str, toga.Box] = {}
+        for field, label in self.FIELDS:
+            container = toga.Box(style=Pack(direction=ROW, margin=5))
+            self.row_containers[field] = container
+            self._render_view_row(field, label, container)
+            self.add(container)
+
+        # Общая метка ошибок
+        self.error_label = toga.Label("", style=Pack(color="red", margin_top=10))
+        self.add(self.error_label)
+
+        # --- Кнопки внизу ---
+        buttons_row = toga.Box(style=Pack(direction=ROW, margin_top=15))
+
+        buttons_row.add(
+            toga.Button(
+                "Назад к календарю",
+                on_press=lambda w: self.on_back(),
+                style=Pack(flex=1, margin=5),
+            )
+        )
+
+        if on_reset is not None:
+            buttons_row.add(
+                toga.Button(
+                    "Сбросить профиль",
+                    on_press=on_reset,
+                    style=Pack(flex=1, margin=5),
+                )
+            )
+
+        self.add(buttons_row)
+
+    # ---------- Строка в режиме просмотра ----------
+    def _render_view_row(self, field: str, label: str, container: toga.Box):
+        container.clear()
+        value = getattr(self.user, field)
+        if field == "schedule":
+            value = ",".join(str(x) for x in value)
+
+        container.add(
+            toga.Label(f"{label}: {value}", style=Pack(flex=1)),
+            toga.Button(
+                "Изменить",
+                on_press=lambda w: self._render_edit_row(field, label, container),
+                style=Pack(width=90),
+            ),
+        )
+
+    # ---------- Строка в режиме редактирования ----------
+    def _render_edit_row(self, field: str, label: str, container: toga.Box):
+        container.clear()
+        current = getattr(self.user, field)
+
+        if field == "anchor":
+            input_widget = toga.DateInput(
+                value=date.fromisoformat(current),
+                style=Pack(flex=1),
+            )
+            get_value = lambda: input_widget.value.isoformat()
+        elif field == "schedule":
+            input_widget = toga.TextInput(
+                value=",".join(str(x) for x in current),
+                style=Pack(flex=1),
+            )
+            get_value = lambda: input_widget.value.strip()
+        else:
+            input_widget = toga.TextInput(
+                value=str(current),
+                style=Pack(flex=1),
+            )
+            get_value = lambda: input_widget.value.strip()
+
+        def save(w):
+            try:
+                self._apply_change(field, get_value())
+            except ValueError as e:
+                self.error_label.text = str(e)
+                return
+            self.error_label.text = ""
+            self._render_view_row(field, label, container)
+
+        def cancel(w):
+            self.error_label.text = ""
+            self._render_view_row(field, label, container)
+
+        container.add(
+            input_widget,
+            toga.Button("✓", on_press=save, style=Pack(width=40)),
+            toga.Button("✗", on_press=cancel, style=Pack(width=40)),
+        )
+
+    # ---------- Применение изменений ----------
+    def _apply_change(self, field: str, value):
+        if field == "name":
+            if not value:
+                raise ValueError("Имя не может быть пустым")
+            self.user.name = value
+
+        elif field == "anchor":
+            try:
+                date.fromisoformat(value)
+            except ValueError:
+                raise ValueError("Дата должна быть в формате ГГГГ-ММ-ДД")
+            self.user.anchor = value
+
+        elif field == "schedule":
+            parsed = User.parse_schedule(value)
+            self.user.schedule = parsed
+
+        # Сообщаем приложению, что поле изменилось
+        self.on_save(field)
 
 
 class CalendarView(toga.Box):
     """Полноценный календарь с навигацией по месяцам и подсветкой сегодня."""
 
-    def __init__(self, user: User, calendar_file, on_reset=None):
+    def __init__(self, user: User, calendar_file, on_open_profile=None):
         super().__init__(style=Pack(direction=COLUMN, margin=10))
         self.user = user
         self.calendar_file = calendar_file
-        self.on_reset = on_reset
+        self.on_open_profile = on_open_profile
 
         # Данные календаря
         self.data = CalendarFunc.load_calendar(calendar_file)
@@ -155,12 +294,12 @@ class CalendarView(toga.Box):
         self.grid_container = toga.Box(style=Pack(direction=COLUMN))
         self.add(self.grid_container)
 
-        # --- 5. Кнопка сброса ---
-        if on_reset is not None:
+        # --- 5. Кнопка перехода в профиль ---
+        if on_open_profile is not None:
             self.add(
                 toga.Button(
-                    "Сбросить профиль",
-                    on_press=on_reset,
+                    "Профиль",
+                    on_press=lambda w: on_open_profile(),
                     style=Pack(margin_top=15),
                 )
             )
@@ -374,6 +513,32 @@ class WSCalendarApp(toga.App):
         self.main_window.content = CalendarView(
             user=self.user,
             calendar_file=self.calendar_file,
+            on_open_profile=self.show_profile,
+        )
+
+    def on_user_field_changed(self, field: str):
+        """Сохраняет изменения профиля. При смене anchor или schedule — пересоздаёт календарь."""
+        self.user.save_to_json(self.users_file)
+
+        if field in ("anchor", "schedule"):
+            # Полная перегенерация календаря: старые месяцы недействительны
+            if self.calendar_file.exists():
+                self.calendar_file.unlink()
+
+            today = date.today()
+            CalendarFunc.add_month_to_data(
+                self.calendar_file,
+                year=today.year,
+                month=today.month,
+                user=self.user,
+            )
+
+    def show_profile(self):
+        """Открывает страницу профиля."""
+        self.main_window.content = ProfileView(
+            user=self.user,
+            on_save=self.on_user_field_changed,
+            on_back=self.show_calendar,
             on_reset=self.reset_profile,
         )
 
