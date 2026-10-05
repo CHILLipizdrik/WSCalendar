@@ -2,7 +2,7 @@ from .UserClass import User
 
 import json
 import calendar
-from datetime import datetime, date
+from datetime import date
 from pathlib import Path
 from itertools import cycle
 
@@ -55,6 +55,9 @@ def add_month_to_data(file_path: Path, year: int, month: int,
     if key in data and not overwrite:
         print(f"Месяц {key} уже есть в календаре.")
         return data
+
+    if not user.schedule:
+        raise ValueError("У пользователя пустой schedule — невозможно построить календарь")
 
     anchor_date = date.fromisoformat(user.anchor)
     schedule = user.schedule

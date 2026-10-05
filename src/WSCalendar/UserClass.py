@@ -1,20 +1,17 @@
 import json
-from datetime import date
 from pathlib import Path
 
 
 class User:
-    def __init__(self, name: str, anchor: str, duration: int, schedule: list | None = None):
+    def __init__(self, name: str, anchor: str, schedule: list | None = None):
         if schedule is None:
             schedule = []
         self.name = name
         self.anchor = anchor
-        self.start_work = int(anchor.split("-")[2])
-        self.duration = int(duration)
         self.schedule = schedule
 
     def __repr__(self):
-        return f"User({self.name!r}, {self.anchor}, {self.duration}, {self.schedule})"
+        return f"User({self.name!r}, {self.anchor}, {self.schedule})"
 
     # ---------- JSON ----------
 
@@ -23,8 +20,6 @@ class User:
         return {
             "name": self.name,
             "anchor": self.anchor,
-            "start_work": self.start_work,
-            "duration": self.duration,
             "schedule": self.schedule,
         }
 
@@ -49,7 +44,6 @@ class User:
         return cls(
             name=data["name"],
             anchor=data["anchor"],
-            duration=data["duration"],
             schedule=data["schedule"],
         )
 

@@ -21,7 +21,7 @@ RU_WEEKDAYS_FULL = [
     "Понедельник", "Вторник", "Среда", "Четверг",
     "Пятница", "Суббота", "Воскресенье",
 ]
-WEEKDAY_SHORT = ["ПНД", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВСК"]
+WEEKDAY_SHORT = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВСК"]
 
 # Цвета ячеек: ключ — тип смены из JSON
 SHIFT_BG = {
@@ -47,7 +47,6 @@ class RegistrationView(toga.Box):
         # --- Поля ввода ---
         self.name_input = toga.TextInput(placeholder="Иван Иванов")
         self.date_input = toga.DateInput(value=date.today())
-        self.length_input = toga.TextInput(placeholder="4")
         self.schedule_input = toga.TextInput(placeholder="1,1,0,0")
         self.error_label = toga.Label("", style=Pack(color="red"))
 
@@ -63,8 +62,6 @@ class RegistrationView(toga.Box):
             self.name_input,
             toga.Label("Дата выхода на работу:", style=Pack(margin_top=10)),
             self.date_input,
-            toga.Label("Длительность графика:", style=Pack(margin_top=10)),
-            self.length_input,
             toga.Label(
                 "График (0 — выходной, 1 — дневная, 2 — ночная):",
                 style=Pack(margin_top=10),
@@ -87,18 +84,9 @@ class RegistrationView(toga.Box):
             self.error_label.text = "Выберите дату выхода на работу"
             return
 
-        # 3. Длительность
+        # 3. График
         try:
-            length = int(self.length_input.value.strip())
-            if length <= 0:
-                raise ValueError
-        except (ValueError, AttributeError):
-            self.error_label.text = "Длительность должна быть положительным числом"
-            return
-
-        # 4. График
-        try:
-            schedule = self.parse_schedule(self.schedule_input.value, length)
+            schedule = self.parse_schedule(self.schedule_input.value)
         except ValueError as e:
             self.error_label.text = str(e)
             return
@@ -108,12 +96,11 @@ class RegistrationView(toga.Box):
         self.on_success({
             "name": name,
             "start_date": start_date.isoformat(),
-            "schedule_length": length,
             "schedule": schedule,
         })
 
     @staticmethod
-    def parse_schedule(raw: str, expected_length: int) -> list:
+    def parse_schedule(raw: str) -> list:
         raw = raw.strip().replace(" ", "")
         if not raw:
             raise ValueError("Введите график")
@@ -128,10 +115,8 @@ class RegistrationView(toga.Box):
         if any(v not in (0, 1, 2) for v in schedule):
             raise ValueError("Каждое значение графика — 0, 1 или 2")
 
-        if len(schedule) != expected_length:
-            raise ValueError(
-                f"Длина графика ({len(schedule)}) не совпадает с указанной ({expected_length})"
-            )
+        if not schedule:
+            raise ValueError("График не может быть пустым")
 
         return schedule
 
@@ -369,7 +354,6 @@ class WSCalendarApp(toga.App):
         self.user = User(
             name=data["name"],
             anchor=data["start_date"],
-            duration=data["schedule_length"],
             schedule=data["schedule"],
         )
         self.user.save_to_json(self.users_file)
@@ -387,16 +371,6 @@ class WSCalendarApp(toga.App):
 
     def show_calendar(self):
         """Показывает экран календаря."""
-        # Генерируем текущий месяц
-        # today = date.today()
-        # CalendarFunc.add_month_to_data(
-        #     self.calendar_file,
-        #     year=today.year,
-        #     month=today.month,
-        #     user=self.user,
-        # )
-
-        # Создаём представление календаря
         self.main_window.content = CalendarView(
             user=self.user,
             calendar_file=self.calendar_file,
